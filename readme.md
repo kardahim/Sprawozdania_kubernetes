@@ -1,3 +1,3 @@
 # Informacje
 
-Repozytorium zniknie po zakończeniu semestru. W kolejnych katalogach będę umieszczał sprawozdania.
+Tutaj zamieszczane będą sprawozdania z laboratoriów z _programowania full-stack w chmurze obliczeniowej_.
