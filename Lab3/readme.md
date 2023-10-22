@@ -57,7 +57,7 @@ kubectl apply -f sidecar-pod.yml
 Włączenie przekazywania portów:
 
 ```bash
-kubectl port-forward sidecar-pod 8080:80
+kubectl port-forward sidecar-pod 8080:80 -n lab3
 ```
 
 Wyświetlenie logów:
