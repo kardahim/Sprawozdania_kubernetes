@@ -153,3 +153,49 @@ Events:
 ```
 
 Z opisu wynika, że ten pod ma poprawnie ustawione limity oraz jest kontrolowany przez _ReplicaSet_.
+
+```bash
+kubectl describe deployment -n lab4
+```
+
+```yaml
+Name:                   restrictednginx
+Namespace:              lab4
+CreationTimestamp:      Sat, 28 Oct 2023 13:46:32 +0200
+Labels:                 app=restrictednginx
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=restrictednginx
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=restrictednginx
+  Containers:
+   nginx:
+    Image:      nginx
+    Port:       <none>
+    Host Port:  <none>
+    Limits:
+      cpu:     250m
+      memory:  256Mi
+    Requests:
+      cpu:        125m
+      memory:     64Mi
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   restrictednginx-5dcd9dc88c (3/3 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  23m   deployment-controller  Scaled up replica set restrictednginx-5dcd9dc88c to 3
+```
+
+Z opisu wynika, że deployment ma 3 działające repliki.
