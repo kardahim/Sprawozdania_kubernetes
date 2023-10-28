@@ -4,3 +4,4 @@ Tutaj zamieszczane będą sprawozdania z laboratoriów z _programowania full-sta
 Obecnie stworzone sprawozdania:
 
 - [Sprawozdanie Lab3](https://github.com/kardahim/Sprawozdania_kubernetes/tree/main/Lab3)
+- [Sprawozdanie Lab4](https://github.com/kardahim/Sprawozdania_kubernetes/tree/main/Lab4)
