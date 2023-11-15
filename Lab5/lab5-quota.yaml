@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  creationTimestamp: null
+  name: lab5-quota
+  namespace: lab5
+spec:
+  hard:
+    cpu: 2000m
+    memory: 1.5Gi
+    pods: "10"
+status: {}
