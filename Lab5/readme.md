@@ -6,7 +6,20 @@ kubectl create namespace lab5
 
 # Stworzenie quoty
 
-![lab5-quota](lab5-quota.yaml)
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  creationTimestamp: null
+  name: lab5-quota
+  namespace: lab5
+spec:
+  hard:
+    cpu: 2000m
+    memory: 1.5Gi
+    pods: "10"
+status: {}
+```
 
 ```bash
 kubectl apply -f lab5-quota.yaml
@@ -16,7 +29,30 @@ kubectl apply -f lab5-quota.yaml
 
 # Stworzenie poda
 
-![worker](worker.yaml)
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: worker
+  name: worker
+  namespace: lab5
+spec:
+  containers:
+    - image: nginx
+      name: worker
+      resources:
+        limits:
+          memory: "200Mi"
+          cpu: "200m"
+        requests:
+          memory: "100Mi"
+          cpu: "100m"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+```
 
 ```bash
 kubectl apply -f worker.yaml
@@ -26,7 +62,47 @@ kubectl apply -f worker.yaml
 
 # Stworzenie deployment oraz service PHP-Apache
 
-![php-apache](php-apache.yaml)
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-apache
+  namespace: lab5
+spec:
+  selector:
+    matchLabels:
+      run: php-apache
+  template:
+    metadata:
+      labels:
+        run: php-apache
+    spec:
+      containers:
+        - name: php-apache
+          image: registry.k8s.io/hpa-example
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: 250Mi
+              cpu: 250m
+            requests:
+              memory: 150Mi
+              cpu: 150m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: php-apache
+  namespace: lab5
+  labels:
+    run: php-apache
+spec:
+  ports:
+    - port: 80
+  selector:
+    run: php-apache
+```
 
 ```bash
 kubectl apply -f php-apache.yaml
@@ -40,7 +116,21 @@ Maksymalna liczba replik jaka może być zastosowana w tej przestrzeni nazw to 5
 
 ![lab5_calc](./../assets/lab5_calc.png)
 
-![php-apache-autoscaler](php-apache-autoscaler.yaml)
+```yaml
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: php-apache
+  namespace: lab5
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: php-apache
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 50
+```
 
 ```bash
 kubectl apply -f php-apache-autoscaler.yaml
