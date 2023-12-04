@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sleepybox2
+  labels:
+    allowToLab8server: "false"
+spec:
+  containers:
+    - name: busybox-container
+      image: busybox
+      command: ["/bin/sh", "-c", "sleep 3600"]

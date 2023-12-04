@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab8server
+  namespace: restricted
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lab8server
+  template:
+    metadata:
+      labels:
+        app: lab8server
+    spec:
+      containers:
+        - name: lab8server
+          image: nginx
