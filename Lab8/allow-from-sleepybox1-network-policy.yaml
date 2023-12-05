@@ -9,9 +9,6 @@ spec:
       app: lab8server
   ingress:
     - from:
-        - namespaceSelector:
-            matchLabels:
-              name: default
         - podSelector:
             matchLabels:
               allowToLab8server: "true"
