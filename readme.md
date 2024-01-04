@@ -6,3 +6,4 @@ Obecnie stworzone sprawozdania:
 - [Sprawozdanie Lab3](https://github.com/kardahim/Sprawozdania_kubernetes/tree/main/Lab3)
 - [Sprawozdanie Lab4](https://github.com/kardahim/Sprawozdania_kubernetes/tree/main/Lab4)
 - [Sprawozdanie Lab5](https://github.com/kardahim/Sprawozdania_kubernetes/tree/main/Lab5)
+- [Sprawozdanie Lab10](https://github.com/kardahim/Sprawozdania_kubernetes/tree/main/Lab10)
